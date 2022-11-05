@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\AuthBackgroundImage.jpg" />
+    <None Remove="Images\AuthLogo.png" />
+    <None Remove="Images\key-icon.png" />
+    <None Remove="Images\UniBIT-Logo-NoText.png" />
+    <None Remove="Images\user-icon.png" />
+    <None Remove="Images\userProfileImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome.Sharp" Version="6.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WPF_46731r.Domain\WPF_46731r.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\AuthBackgroundImage.jpg" />
+    <Resource Include="Images\AuthLogo.png" />
+    <Resource Include="Images\key-icon.png" />
+    <Resource Include="Images\UniBIT-Logo-NoText.png" />
+    <Resource Include="Images\user-icon.png" />
+    <Resource Include="Images\userProfileImage.png" />
+  </ItemGroup>
+
+</Project>

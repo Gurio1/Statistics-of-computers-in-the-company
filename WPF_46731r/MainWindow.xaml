@@ -1,0 +1,190 @@
+﻿<Window
+    x:Class="WPF_46731r.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPF_46731r.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:views="clr-namespace:WPF_46731r.Views"
+    xmlns:vm="clr-namespace:WPF_46731r.ViewModels"
+    Title="MainWindow"
+    Width="1300"
+    Height="700"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Window.Style>
+        <Style>
+            <Setter Property="WindowChrome.WindowChrome">
+                <Setter.Value>
+                    <WindowChrome
+                        CaptionHeight="0"
+                        GlassFrameThickness="-1"
+                        ResizeBorderThickness="0" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+
+    <Border BorderThickness="2">
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Offset="0.3" Color="{StaticResource winBorderColor1}" />
+                <GradientStop Offset="0.8" Color="{StaticResource winBorderColor2}" />
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <!--  Nav menu  -->
+                <ColumnDefinition Width="250" />
+                <!--  Content Section  -->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--  Nav menu  -->
+            <controls:NavigationBar DataContext="{Binding NavBar}" />
+
+            <!--  Main Section background color  -->
+            <Border Grid.Column="1">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                        <GradientStop Offset="0" Color="{StaticResource loginBackColor1}" />
+                        <GradientStop Offset="1" Color="{StaticResource loginBackColor2}" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!--  Control bar  -->
+                        <RowDefinition Height="25" />
+                        <!--  Header  -->
+                        <RowDefinition Height="35" />
+                        <!--  Content section  -->
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Control bar  -->
+                    <StackPanel
+                        x:Name="pnlControlBar"
+                        Grid.Row="0"
+                        Background="Transparent"
+                        FlowDirection="RightToLeft"
+                        MouseEnter="pnlControlBar_MouseEnter"
+                        MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                        Orientation="Horizontal">
+
+                        <Button
+                            x:Name="btnClose"
+                            Click="btnClose_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color4}">
+
+
+                            <fa:IconImage Icon="Xmark" Style="{StaticResource controlButtonIcon}" />
+                        </Button>
+
+                        <Button
+                            x:Name="btnMaximize"
+                            Click="btnMaximize_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color6}">
+                            <fa:IconImage Icon="Square" Style="{StaticResource controlButtonIcon}" />
+                        </Button>
+
+                        <Button
+                            x:Name="btnMinimize"
+                            Click="btnMinimize_Click"
+                            Style="{StaticResource controlButton}"
+                            Tag="{StaticResource color8}">
+                            <fa:IconImage
+                                Width="12"
+                                Icon="WindowMinimize"
+                                Style="{StaticResource controlButtonIcon}" />
+                        </Button>
+                    </StackPanel>
+
+                    <!--  Header  -->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                            <fa:IconImage
+                                Width="20"
+                                Height="20"
+                                Margin="35,0,10,0"
+                                VerticalAlignment="Bottom"
+                                Foreground="{StaticResource titleColor2}"
+                                Icon="Home" />
+
+
+                            <TextBlock
+                                Height="17"
+                                VerticalAlignment="Bottom"
+                                FontFamily="Montserrat"
+                                FontSize="16"
+                                FontWeight="Medium"
+                                Foreground="{StaticResource titleColor2}"
+                                Text="Home" />
+                        </StackPanel>
+
+                        <!--  User options  -->
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="0,0,30,0"
+                            VerticalAlignment="Center"
+                            FlowDirection="RightToLeft"
+                            Orientation="Horizontal">
+
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontFamily="Montserrat"
+                                FontSize="12"
+                                Foreground="{StaticResource titleColor3}"
+                                Text="{Binding User}" />
+
+                            <Ellipse
+                                Width="35"
+                                Height="35"
+                                Margin="10,0,10,0"
+                                Stroke="{StaticResource color2}"
+                                StrokeThickness="2">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/userProfileImage.png" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </StackPanel>
+                    </Grid>
+
+                    <!--  Content  -->
+                    <ContentControl
+                        Grid.Row="2"
+                        Margin="25"
+                        Content="{Binding CurrentViewModel}">
+                        <ContentControl.Resources>
+
+                            <DataTemplate DataType="{x:Type vm:ComputersViewModel}">
+                                <views:ComputersView />
+                            </DataTemplate>
+
+                            <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+                                <views:HomeView />
+                            </DataTemplate>
+                        </ContentControl.Resources>
+                    </ContentControl>
+
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </Border>
+</Window>

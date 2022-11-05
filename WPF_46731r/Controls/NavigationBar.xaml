@@ -1,0 +1,75 @@
+﻿<UserControl
+    x:Class="WPF_46731r.Controls.NavigationBar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:local="clr-namespace:WPF_46731r.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:WPF_46731r.ViewModels"
+    mc:Ignorable="d">
+
+    <Border Grid.Column="0">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
+                <GradientStop Offset="0" Color="{StaticResource secondaryBackColor1}" />
+                <GradientStop Offset="1" Color="{StaticResource secondaryBackColor2}" />
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <StackPanel>
+            <!--  Logo  -->
+            <StackPanel
+                Height="100"
+                Margin="0,0,0,20"
+                Orientation="Horizontal">
+
+                <Image Height="100" Source="/Images/UniBIT-Logo-NoText.png" />
+                <TextBlock
+                    Width="150"
+                    VerticalAlignment="Center"
+                    FontFamily="Montserrat"
+                    FontSize="20"
+                    FontWeight="Medium"
+                    Foreground="{StaticResource titleColor2}"
+                    Text="Лаборатория                                     Дж.Атанасов"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+
+            <!--  Menu Buttons  -->
+            <RadioButton
+                Command="{Binding NavigateHomeCommand}"
+                IsChecked="True"
+                Style="{StaticResource menuButton}"
+                Tag="{StaticResource color1}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Home" Style="{StaticResource menuButtonIcon}" />
+                    <TextBlock Style="{StaticResource menuButtonText}" Text="Home" />
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource menuButton}" 
+                         Tag="{StaticResource color3}"
+                         Command="{Binding NavigateComputerCommand}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Computer" Style="{StaticResource menuButtonIcon}" />
+                    <TextBlock Style="{StaticResource menuButtonText}" Text="Computers" />
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource color2}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="KitMedical" Style="{StaticResource menuButtonIcon}" />
+                    <TextBlock Style="{StaticResource menuButtonText}" Text="Defects" />
+                </StackPanel>
+            </RadioButton>
+
+        </StackPanel>
+
+    </Border>
+
+
+</UserControl>
