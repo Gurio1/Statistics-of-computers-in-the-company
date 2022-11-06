@@ -4,43 +4,49 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-    xmlns:local="clr-namespace:WPF_46731r.Views"
+    xmlns:local="clr-namespace:WPF_46731r.Services"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:self="clr-namespace:WPF_46731r.Views"
+    xmlns:vm="clr-namespace:WPF_46731r.ViewModels"
+    xmlns:comp="clr-namespace:WPF_46731r.Domain.Models.Computer;assembly=WPF_46731r.Domain"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="100" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TreeView Name="trvFamilies" Grid.Column="0">
-            <TreeView.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.7">
-                    <GradientStop Offset="0" Color="{StaticResource secondaryBackColor1}" />
-                    <GradientStop Offset="1" Color="{StaticResource secondaryBackColor2}" />
-                </LinearGradientBrush>
-            </TreeView.Background>
 
-            <TreeView.Resources>
-                <HierarchicalDataTemplate DataType="{x:Type self:Family}" ItemsSource="{Binding Members}">
-                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                        <Image Margin="0,0,5,0" Source="/WpfTutorialSamples;component/Images/group.png" />
-                        <TextBlock Foreground="Azure" Text="{Binding Name}" />
-                        <TextBlock Foreground="Green" Text=" [" />
-                        <TextBlock Foreground="Green" Text="{Binding Members.Count}" />
-                        <TextBlock Foreground="Green" Text="]" />
-                    </StackPanel>
-                </HierarchicalDataTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type self:FamilyMember}" ItemsSource="{Binding Members}">
+        <local:ExtendedTreeView
+            ItemsSource="{Binding Tree.Families}"
+            SelectedItem_="{Binding Item, Mode=TwoWay}"
+            Style="{StaticResource ExtendedTreeView}">
+            <local:ExtendedTreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type vm:Family}" ItemsSource="{Binding Members}">
                     <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                         <fa:IconImage
                             Width="15"
                             Height="15"
                             Margin="0,0,5,0"
                             Foreground="{StaticResource titleColor2}"
-                            Icon="Home" />
+                            Icon="Building" />
+                        <TextBlock Foreground="Azure" Text="{Binding Name}" />
+                        <TextBlock Foreground="Green" Text=" [" />
+                        <TextBlock Foreground="Green" Text="{Binding Members.Count}" />
+                        <TextBlock Foreground="Green" Text="]" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type vm:FamilyMember}" ItemsSource="{Binding Members}">
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <fa:IconImage
+                            Width="15"
+                            Height="15"
+                            Margin="0,0,5,0"
+                            Foreground="{StaticResource titleColor2}"
+                            Icon="DoorOpen" />
                         <TextBlock
                             Foreground="Pink"
                             Style="{StaticResource menuButtonText}"
@@ -50,7 +56,7 @@
                         <TextBlock Foreground="Orange" Text="]" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
-                <DataTemplate DataType="{x:Type self:MemberOfFamilyMember}">
+                <DataTemplate DataType="{x:Type comp:Computer}">
                     <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
                         <fa:IconImage
                             Width="15"
@@ -58,10 +64,19 @@
                             Margin="0,0,5,0"
                             Foreground="{StaticResource titleColor3}"
                             Icon="Computer" />
-                        <TextBlock Foreground="Coral" Text="{Binding Name}" />
+                        <TextBlock Foreground="Coral" Text="{Binding hostName}" />
                     </StackPanel>
                 </DataTemplate>
-            </TreeView.Resources>
-        </TreeView>
+            </local:ExtendedTreeView.Resources>
+        </local:ExtendedTreeView>
+
+
+        <StackPanel Grid.Column="2">
+            <TextBlock
+                FontSize="16"
+                FontWeight="Medium"
+                Foreground="White"
+                Text="{Binding Item.hostName}" />
+        </StackPanel>
     </Grid>
 </UserControl>

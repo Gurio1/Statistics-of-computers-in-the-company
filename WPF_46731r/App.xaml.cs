@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using WPF_46731r.Domain.Models;
+using WPF_46731r.Domain.Models.Computer;
+using WPF_46731r.Domain.Service;
 using WPF_46731r.Services;
 using WPF_46731r.State.Navigators;
 using WPF_46731r.ViewModels;
@@ -17,6 +20,8 @@ namespace WPF_46731r
         private static WindowNavigator _winNav;
         private  static INavigator _navigator;
         private static NavigationViewModelBar _navBar;
+        private static ApplicationUser _user;
+        private static List<Computer> _comps;
 
         public App()
         {
@@ -30,18 +35,20 @@ namespace WPF_46731r
             var navServ = CreateHomeViewModel();
             navServ.Navigate();
 
-            //var loginView = new LoginView()
-            //{
-            //    DataContext = new LoginViewModel(_winNav)
-            //};
-            //_winNav.CurrentView = loginView;
+            var loginView = new LoginView()
+            {
+                DataContext = new LoginViewModel(_winNav)
+            };
+            _winNav.CurrentView = loginView;
 
-            InitMainView(new ApplicationUser() { Name = "Test" });
+            //InitMainView(new ApplicationUser() { Name = "Test" });
             base.OnStartup(e);
         }
 
-        public static void InitMainView(ApplicationUser user)
+        public static async void InitMainView(ApplicationUser user)
         {
+            _user = user;
+            _comps = await HttpService.GetAllComputers(user);
             _winNav.CurrentView = new MainWindow()
             {
                 DataContext = new MainViewModel(_navigator,user,_navBar)
@@ -56,7 +63,7 @@ namespace WPF_46731r
 
         private INavigationService<ComputersViewModel> CreateComputersViewModel()
         {
-            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar));
+            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar,new TreeViewModel(_comps),new TreeViewModelDetails()));
         }
     }
 }

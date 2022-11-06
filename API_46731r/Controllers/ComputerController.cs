@@ -1,4 +1,5 @@
-﻿using API_46731r.Domain.Entities;
+﻿using API_46731r.Contracts.Computer;
+using API_46731r.Domain.Entities;
 using API_46731r.Services.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace API_46731r.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<Computer>>> GetAllComputers()
+        public async Task<ActionResult<IEnumerable<ComputerDTO>>> GetAllComputers()
         {
             Stopwatch stopwatc = Stopwatch.StartNew();
 
@@ -33,6 +34,7 @@ namespace API_46731r.Controllers
 
             _logger.LogInformation($"{nameof(GetAllComputers)} was executed for {stopwatc.ElapsedMilliseconds} ms");
 
+            await Task.Delay(5000);
             return Ok(entities);
 
         }

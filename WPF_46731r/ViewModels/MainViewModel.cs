@@ -12,7 +12,6 @@ namespace WPF_46731r.ViewModels
         private readonly INavigator _navigator;
 
         public ApplicationUser User { get; }
-        public ICommand NavigateHomeCommand { get; }
         public ViewModelBase CurrentViewModel => _navigator.CurrentViewModel;
 
         public NavigationViewModelBar NavBar { get; }
@@ -22,8 +21,6 @@ namespace WPF_46731r.ViewModels
             _navigator = navigator;
 
             _navigator.CurrentViewModelChanged += OnCurrentViewModelChanged;
-
-            NavigateHomeCommand = new NavigateCommand<HomeViewModel>(new NavigationService<HomeViewModel>(_navigator,()=>new HomeViewModel(viewModelBar)));
 
             User = user;
 

@@ -1,3 +1,4 @@
+using API_46731r.Contracts;
 using API_46731r.Infrastructure;
 using API_46731r.Services;
 using API_46731r.Services.Authentication;
@@ -90,6 +91,10 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 builder.Services.AddAuthorization();
+
+builder.Services.AddAutoMapper(typeof(ApplicationUserDTO).Assembly);
+
+
 
 var app = builder.Build();
 
