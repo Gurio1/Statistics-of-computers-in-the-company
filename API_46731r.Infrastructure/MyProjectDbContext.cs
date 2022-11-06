@@ -19,6 +19,8 @@ namespace API_46731r.Infrastructure
         }
 
         public DbSet<Computer> Computers { get; set; }
+        public DbSet<Building> Buildings { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
         public DbSet<ComputerCharacteristics> ComputerCharacteristics { get; set; }
 

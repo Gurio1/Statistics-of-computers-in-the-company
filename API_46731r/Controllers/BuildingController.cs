@@ -10,32 +10,31 @@ namespace API_46731r.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ComputerController : GenericCRUDController<Computer, IComputerService>
+    public class BuildingController : GenericCRUDController<Building,IBuildingService>
     {
-        private readonly IComputerService _computerService;
-        private readonly ILogger<ComputerController> _logger;
+        private readonly IBuildingService _buildingService;
+        private readonly ILogger<BuildingController> _logger;
 
-        public ComputerController(IComputerService computerService, ILogger<ComputerController> logger) : base(computerService, logger)
+        public BuildingController(IBuildingService buildingService, ILogger<BuildingController> logger) : base(buildingService, logger)
         {
-            _computerService = computerService;
+            _buildingService = buildingService;
             _logger = logger;
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<ComputerDTO>>> GetAllComputers()
         {
             Stopwatch stopwatc = Stopwatch.StartNew();
 
-            var entities = await _computerService.GetAllWithIncludesAsync();
+            var entities = await _buildingService.GetAllWithIncludesAsync();
 
             stopwatc.Stop();
 
             _logger.LogInformation($"{nameof(GetAllComputers)} was executed for {stopwatc.ElapsedMilliseconds} ms");
 
-            await Task.Delay(5000);
             return Ok(entities);
 
         }
+
     }
 }

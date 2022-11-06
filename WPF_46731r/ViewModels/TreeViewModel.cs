@@ -15,36 +15,13 @@ namespace WPF_46731r.ViewModels
     {
 
         public List<Family> Families { get; private set; }
-        public List<Computer> Computers { get; private set; }
-        public TreeViewModel(List<Computer> Computers)
+        public ObservableCollection<Building> Buildings { get; private set; }
+        public TreeViewModel(ObservableCollection<Building> Buildings)
         {
-            this.Computers = Computers;
-            FillList();
+            this.Buildings = Buildings;
         }
 
-        public async void FillList()
-        {
-            Families = new List<Family>();
-            Family family1 = new Family() { Name = "Унибит-1" };
-
-            var a = new FamilyMember(Computers) { Name = "101" };
-            var b = new FamilyMember(Computers) { Name = "102" };
-            var c = new FamilyMember(Computers) { Name = "202" };
-
-            //a.Members.Add(new MemberOf() { Name = "U1-101-1" });
-            //b.Members.Add(new MemberOf() { Name = "U1-102-1" });
-            //c.Members.Add(new MemberOf() { Name = "U1-202-1" });
-
-            family1.Members.Add(a);
-            family1.Members.Add(b);
-            family1.Members.Add(c);
-            Families.Add(family1);
-
-            Family family2 = new Family() { Name = "Унибит-2" };
-            family2.Members.Add(b);
-            family2.Members.Add(c);
-            Families.Add(family2);
-        }
+        
 
     }
     public class Family

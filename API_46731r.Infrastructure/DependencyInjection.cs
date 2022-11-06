@@ -14,6 +14,7 @@ namespace API_46731r.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection Services)
         {
             Services.AddScoped<IComputerRepository, ComputerRepository>();
+            Services.AddScoped<IBuildingRepository, BuildingRepository>();
             Services.AddScoped<IUserRepository, UserRepository>();
 
             return Services;

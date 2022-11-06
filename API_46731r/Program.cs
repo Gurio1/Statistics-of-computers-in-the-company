@@ -92,7 +92,7 @@ builder.Services.AddAuthentication(opt =>
 });
 builder.Services.AddAuthorization();
 
-builder.Services.AddAutoMapper(typeof(ApplicationUserDTO).Assembly);
+builder.Services.AddAutoMapper(typeof(BuildingDTO).Assembly);
 
 
 

@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using System.Net.Http.Headers;
 using WPF_46731r.Domain.Models;
 using WPF_46731r.Domain.Models.Computer;
+using System.Collections.ObjectModel;
 
 namespace WPF_46731r.Domain.Service
 {
@@ -33,7 +34,7 @@ namespace WPF_46731r.Domain.Service
             }
         }
 
-        public static async Task<List<Computer>> GetAllComputers(ApplicationUser user)
+        public static async Task<ObservableCollection<Building>> GetAllBuildings(ApplicationUser user)
         {
             using (var client = new HttpClient())
             {
@@ -42,11 +43,12 @@ namespace WPF_46731r.Domain.Service
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",$"{user.JWT}" );
 
 
-                var response = await client.GetAsync("https://localhost:7211/api/Computer");
+                var response = await client.GetAsync("https://localhost:7211/api/Building");
 
                 if (response.IsSuccessStatusCode)
                 {
-                    return await response.Content.ReadFromJsonAsync<List<Computer>>();
+                    var test = await response.Content.ReadFromJsonAsync<List<Building>>();
+                    return new ObservableCollection<Building>(test);
                 }
                 return null;
             }

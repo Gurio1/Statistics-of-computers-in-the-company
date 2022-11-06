@@ -11,7 +11,7 @@ namespace WPF_46731r.ViewModels
     {
         private NavigationViewModelBar _navigationBar { get; }
         public TreeViewModel Tree { get => _tree; set => _tree = value; }
-        public TreeViewModelDetails ItemTreeDetails { get => _itemTreeDetails; set => _itemTreeDetails = value; }
+        public ComputerDetailsViewModel ItemTreeDetails { get => _itemTreeDetails; set => _itemTreeDetails = value; }
 
         private Computer _item;
 
@@ -19,10 +19,10 @@ namespace WPF_46731r.ViewModels
 
         private TreeViewModel _tree;
 
-        private TreeViewModelDetails _itemTreeDetails;
+        private ComputerDetailsViewModel _itemTreeDetails;
         public ComputersViewModel(NavigationViewModelBar navigationViewModelBar,
                                   TreeViewModel tree,
-                                  TreeViewModelDetails itemTreeDetails)
+                                  ComputerDetailsViewModel itemTreeDetails)
         {
             _navigationBar = navigationViewModelBar;
             Tree = tree;

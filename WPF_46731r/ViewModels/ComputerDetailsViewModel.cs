@@ -7,7 +7,7 @@ using WPF_46731r.Domain.Models.Computer;
 
 namespace WPF_46731r.ViewModels
 {
-    public class TreeViewModelDetails : ViewModelBase
+    public class ComputerDetailsViewModel : ViewModelBase
     {
         private Computer _item;
 

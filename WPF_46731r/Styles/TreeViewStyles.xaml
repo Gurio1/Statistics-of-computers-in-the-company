@@ -153,7 +153,7 @@
                                 <VisualState x:Name="Selected">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Panel.Background).                     (SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource SelectedBackgroundColor}" />
+                                            <!--<EasingColorKeyFrame KeyTime="0" Value="{StaticResource SelectedBackgroundColor}" />-->
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

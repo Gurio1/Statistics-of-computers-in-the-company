@@ -33,7 +33,7 @@ namespace API_46731r.Controllers
         {
 
             _logger.LogInformation($"Entered {DateTime.Now}");
-            string message = string.Empty;
+
             var result = await _authenticationService.LogIn(userVM);
 
             var userDTO = new ApplicationUserDTO()

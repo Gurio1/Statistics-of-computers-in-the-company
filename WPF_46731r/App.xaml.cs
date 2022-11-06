@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows;
 using WPF_46731r.Domain.Models;
 using WPF_46731r.Domain.Models.Computer;
@@ -21,7 +22,7 @@ namespace WPF_46731r
         private  static INavigator _navigator;
         private static NavigationViewModelBar _navBar;
         private static ApplicationUser _user;
-        private static List<Computer> _comps;
+        private static ObservableCollection<Building> _comps;
 
         public App()
         {
@@ -48,7 +49,7 @@ namespace WPF_46731r
         public static async void InitMainView(ApplicationUser user)
         {
             _user = user;
-            _comps = await HttpService.GetAllComputers(user);
+            _comps = await HttpService.GetAllBuildings(user);
             _winNav.CurrentView = new MainWindow()
             {
                 DataContext = new MainViewModel(_navigator,user,_navBar)
@@ -63,7 +64,7 @@ namespace WPF_46731r
 
         private INavigationService<ComputersViewModel> CreateComputersViewModel()
         {
-            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar,new TreeViewModel(_comps),new TreeViewModelDetails()));
+            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar,new TreeViewModel(_comps),new ComputerDetailsViewModel()));
         }
     }
 }
