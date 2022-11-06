@@ -1,1 +1,2 @@
-# VSP_46731r_MyProject
+# Statistics-of-computers-in-the-company
+Under development
