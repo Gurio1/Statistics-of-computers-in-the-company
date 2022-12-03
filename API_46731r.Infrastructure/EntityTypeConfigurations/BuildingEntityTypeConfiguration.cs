@@ -17,6 +17,8 @@ namespace API_46731r.Infrastructure.EntityTypeConfigurations
 
             builder.HasKey(c => c.Id);
 
+            builder.HasIndex(c => c.Name).IsUnique();
+
             builder.Property(c => c.Name).HasMaxLength(50);
 
             builder.HasMany(r =>r.Rooms)

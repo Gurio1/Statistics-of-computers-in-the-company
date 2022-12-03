@@ -10,14 +10,14 @@
                     <Border
                         Name="Border"
                         BorderThickness="1"
-                        CornerRadius="1">
+                        CornerRadius="15">
                         <Border.BorderBrush>
-                            <SolidColorBrush Color="{DynamicResource winBorderColor1}" />
+                            <SolidColorBrush Color="#7678ed" />
                         </Border.BorderBrush>
                         <Border.Background>
                             <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
-                                <GradientStop Offset="0" Color="{StaticResource secondaryBackColor1}" />
-                                <GradientStop Offset="1" Color="{StaticResource secondaryBackColor2}" />
+                                <GradientStop Offset="0" Color="#30638e" /> <!--38a3a5-->
+                                <GradientStop Offset="1" Color="#364958" /> <!--40916c-->
                             </LinearGradientBrush>
                         </Border.Background>
                         <ScrollViewer
@@ -112,6 +112,8 @@
         <Setter Property="Padding" Value="1,0,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
+        <Setter Property="BorderBrush" Value="#7678ed" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -153,7 +155,7 @@
                                 <VisualState x:Name="Selected">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Panel.Background).                     (SolidColorBrush.Color)">
-                                            <!--<EasingColorKeyFrame KeyTime="0" Value="{StaticResource SelectedBackgroundColor}" />-->
+                                            <EasingColorKeyFrame KeyTime="0" Value="#003d5b" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -161,7 +163,7 @@
                                 <VisualState x:Name="SelectedInactive">
                                     <Storyboard>
                                         <ColorAnimationUsingKeyFrames Storyboard.TargetName="Bd" Storyboard.TargetProperty="(Panel.Background).                     (SolidColorBrush.Color)">
-                                            <EasingColorKeyFrame KeyTime="0" Value="{StaticResource SelectedUnfocusedColor}" />
+                                            <EasingColorKeyFrame KeyTime="0" Value="#003d5b" />
                                         </ColorAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

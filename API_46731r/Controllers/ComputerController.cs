@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace API_46731r.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]/[Action]")]
     [ApiController]
     [Authorize]
     public class ComputerController : GenericCRUDController<Computer, IComputerService>

@@ -1,8 +1,4 @@
-﻿using System.Windows.Input;
-using WPF_46731r.Commands;
-using WPF_46731r.Commands.Navigation;
-using WPF_46731r.Domain.Models;
-using WPF_46731r.Services;
+﻿using WPF_46731r.Domain.Models;
 using WPF_46731r.State.Navigators;
 
 namespace WPF_46731r.ViewModels
@@ -20,7 +16,7 @@ namespace WPF_46731r.ViewModels
         {
             _navigator = navigator;
 
-            _navigator.CurrentViewModelChanged += OnCurrentViewModelChanged;
+            _navigator.CurrentFormChanged += OnCurrentViewModelChanged;
 
             User = user;
 

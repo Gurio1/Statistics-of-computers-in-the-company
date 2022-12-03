@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 using System.Windows;
 using WPF_46731r.ViewModels;
 
-namespace WPF_46731r.State.Navigators
+namespace WPF_46731r.State.Navigators;
+
+public class WindowNavigator
 {
-    public class WindowNavigator
+    private Window _currentView;
+    public event Action CurrentFormChanged;
+
+    public Window CurrentView
     {
-        private Window _currentView;
-        public event Action CurrentViewChanged;
-        public Window CurrentView
+        get
         {
-            get
-            {
-                return _currentView;
-            }
-            set
-            {
-                _currentView?.Close();
-
-                _currentView = value;
-                _currentView.Show();
-                OnCurrentViewChanged();
-            }
+            return _currentView;
         }
-
-        private void OnCurrentViewChanged()
+        set
         {
-            CurrentViewChanged?.Invoke();
+            _currentView?.Close();
+
+            _currentView = value;
+            _currentView.Show();
+            OnCurrentViewChanged();
         }
+    }
+
+    private void OnCurrentViewChanged()
+    {
+        CurrentFormChanged?.Invoke();
     }
 }

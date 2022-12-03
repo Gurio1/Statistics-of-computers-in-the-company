@@ -7,7 +7,6 @@ namespace WPF_46731r.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-
-        event Action CurrentViewModelChanged;
+        event Action CurrentFormChanged;
     }
 }

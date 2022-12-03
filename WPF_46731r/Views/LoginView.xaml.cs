@@ -31,11 +31,5 @@ namespace WPF_46731r.Views
         {
             Application.Current.Shutdown();
         }
-
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
 }

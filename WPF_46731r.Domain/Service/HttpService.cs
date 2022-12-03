@@ -18,7 +18,7 @@ namespace WPF_46731r.Domain.Service
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "Your Oauth token");
 
-                var user = new User() { Email = email, Password = password };
+                var user = new UserVm() { Email = email, Password = password };
                 var response = await client.PostAsJsonAsync("https://localhost:7211/api/Authentication", user);
 
                 if (response.IsSuccessStatusCode)
@@ -43,7 +43,7 @@ namespace WPF_46731r.Domain.Service
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer",$"{user.JWT}" );
 
 
-                var response = await client.GetAsync("https://localhost:7211/api/Building");
+                var response = await client.GetAsync("https://localhost:7211/Building/GetAllComputers");
 
                 if (response.IsSuccessStatusCode)
                 {

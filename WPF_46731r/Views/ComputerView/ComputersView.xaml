@@ -1,0 +1,97 @@
+﻿<UserControl
+    x:Class="WPF_46731r.Views.ComputersView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="clr-namespace:WPF_46731r.Domain.Models;assembly=WPF_46731r.Domain"
+    xmlns:comp="clr-namespace:WPF_46731r.Domain.Models.Computer;assembly=WPF_46731r.Domain"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    xmlns:local="clr-namespace:WPF_46731r.Services"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:WPF_46731r.ViewModels.ComputerView.UserControls"
+    xmlns:details="clr-namespace:WPF_46731r.Views.ComputerView.Details"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <local:ExtendedTreeView
+            ItemsSource="{Binding Tree.Buildings}"
+            SelectedComputer_="{Binding Computer, Mode=TwoWay}"
+            SelectedBuilding_="{Binding Building, Mode=TwoWay}"
+            SelectedRoom_="{Binding Room, Mode=TwoWay}"
+            Style="{StaticResource ExtendedTreeView}">
+            <local:ExtendedTreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type b:Building}"
+                                          ItemsSource="{Binding Rooms}">
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <fa:IconImage
+                            Width="15"
+                            Height="15"
+                            Margin="0,0,5,0"
+                            Foreground="{StaticResource titleColor2}"
+                            Icon="Building" />
+                        <TextBlock Foreground="Azure" Text="{Binding Name}" />
+                        <TextBlock Foreground="Green" Text=" [" />
+                        <TextBlock Foreground="Green" Text="{Binding Rooms.Count}" />
+                        <TextBlock Foreground="Green" Text="]" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type b:Room}" ItemsSource="{Binding Computers}">
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <fa:IconImage
+                            Width="15"
+                            Height="15"
+                            Margin="0,0,5,0"
+                            Foreground="{StaticResource titleColor2}"
+                            Icon="DoorOpen" />
+                        <TextBlock
+                            Foreground="Pink"
+                            Style="{StaticResource menuButtonText}"
+                            Text="{Binding Name}" />
+                        <TextBlock Foreground="Orange" Text=" [" />
+                        <TextBlock Foreground="Orange" Text="{Binding Computers.Count}" />
+                        <TextBlock Foreground="Orange" Text="]" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type comp:Computer}">
+                    <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
+                        <fa:IconImage
+                            Width="15"
+                            Height="15"
+                            Margin="0,0,5,0"
+                            Foreground="{StaticResource titleColor3}"
+                            Icon="Computer" />
+                        <TextBlock Foreground="Coral" Text="{Binding hostName}" />
+                    </StackPanel>
+                </DataTemplate>
+            </local:ExtendedTreeView.Resources>
+        </local:ExtendedTreeView>
+        
+        <!--  Content  -->
+        <ContentControl
+            Grid.Column="2"
+            Content="{Binding CurrentUserControlViewModel}">
+            <ContentControl.Resources>
+
+                <DataTemplate DataType="{x:Type vm:BuildingDetailsViewModel}">
+                    <details:BuildingDetailsView />
+                </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type vm:RoomDetailsViewModel}">
+                    <details:RoomDetailsView />
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type vm:ComputerDetailsViewModel}">
+                    <details:ComputerDetailsView />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
+    </Grid>
+</UserControl>

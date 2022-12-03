@@ -5,8 +5,9 @@ namespace WPF_46731r.State.Navigators
 {
     public class Navigator : INavigator
     {
-        private ViewModelBase _currentViewModel;
-        public event Action CurrentViewModelChanged;
+        private ViewModelBase? _currentViewModel;
+        public event Action? CurrentFormChanged;
+
         public ViewModelBase CurrentViewModel
         {
             get
@@ -15,7 +16,6 @@ namespace WPF_46731r.State.Navigators
             }
             set
             {
-                _currentViewModel?.Dispose();
 
                 _currentViewModel = value;
                 OnCurrentViewModelChanged();
@@ -24,7 +24,7 @@ namespace WPF_46731r.State.Navigators
 
         private void OnCurrentViewModelChanged()
         {
-            CurrentViewModelChanged?.Invoke();
+            CurrentFormChanged?.Invoke();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using WPF_46731r.Commands.Navigation;
 using WPF_46731r.Services;
+using WPF_46731r.ViewModels.ComputerView;
 
 namespace WPF_46731r.ViewModels
 {

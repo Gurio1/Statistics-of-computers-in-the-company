@@ -10,6 +10,6 @@ namespace API_46731r.Domain.Entities
     {
         public string Name { get; set; }
 
-        public virtual ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<Room> ?Rooms { get; set; }
     }
 }

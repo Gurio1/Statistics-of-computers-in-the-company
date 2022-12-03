@@ -9,6 +9,7 @@ using WPF_46731r.Domain.Service;
 using WPF_46731r.Services;
 using WPF_46731r.State.Navigators;
 using WPF_46731r.ViewModels;
+using WPF_46731r.ViewModels.ComputerView;
 using WPF_46731r.Views;
 
 namespace WPF_46731r
@@ -19,7 +20,7 @@ namespace WPF_46731r
     public partial class App : Application  
     {
         private static WindowNavigator _winNav;
-        private  static INavigator _navigator;
+        private static INavigator _navigator;
         private static NavigationViewModelBar _navBar;
         private static ApplicationUser _user;
         private static ObservableCollection<Building> _comps;
@@ -64,7 +65,8 @@ namespace WPF_46731r
 
         private INavigationService<ComputersViewModel> CreateComputersViewModel()
         {
-            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar,new TreeViewModel(_comps),new ComputerDetailsViewModel()));
+            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar,new TreeViewModel(_comps), _winNav));
         }
+
     }
 }

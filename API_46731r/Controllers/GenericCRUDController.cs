@@ -18,6 +18,19 @@ namespace API_46731r.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<TEntity>>> GetEntities()
+        {
+            var result = await _entityService.GetAllAsync();
+
+            if (result is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<ActionResult<TEntity>> CreateEntity([FromBody] TEntity computer)
         {

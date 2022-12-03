@@ -12,6 +12,6 @@ namespace API_46731r.Domain.Entities
 
         public int BuildingId { get; set; }
 
-        public virtual ICollection<Computer> Computers { get; set; }
+        public virtual ICollection<Computer>? Computers { get; set; }
     }
 }

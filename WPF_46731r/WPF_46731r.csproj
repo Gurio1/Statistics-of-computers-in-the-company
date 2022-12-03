@@ -9,11 +9,24 @@
 
   <ItemGroup>
     <None Remove="Images\AuthBackgroundImage.jpg" />
-    <None Remove="Images\AuthLogo.png" />
+    <None Remove="Images\comp1.jfif" />
+    <None Remove="Images\comp2.jfif" />
+    <None Remove="Images\comp3.jfif" />
+    <None Remove="Images\comp4.jfif" />
+    <None Remove="Images\images.jfif" />
+    <None Remove="Images\images1.jfif" />
     <None Remove="Images\key-icon.png" />
     <None Remove="Images\UniBIT-Logo-NoText.png" />
     <None Remove="Images\user-icon.png" />
     <None Remove="Images\userProfileImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\comp1.jfif" />
+    <Resource Include="Images\comp2.jfif" />
+    <Resource Include="Images\comp3.jfif" />
+    <Resource Include="Images\comp4.jfif" />
+    <Resource Include="Images\images1.jfif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,11 +41,25 @@
 
   <ItemGroup>
     <Resource Include="Images\AuthBackgroundImage.jpg" />
-    <Resource Include="Images\AuthLogo.png" />
+    <Resource Include="Images\images.jfif" />
     <Resource Include="Images\key-icon.png" />
     <Resource Include="Images\UniBIT-Logo-NoText.png" />
     <Resource Include="Images\user-icon.png" />
     <Resource Include="Images\userProfileImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\ComputerView\ComputersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ComputerView\ComputersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
