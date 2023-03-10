@@ -9,25 +9,8 @@ namespace API_46731r.Contracts.Profiles
     {
         public ComputerProfile()
         {
-            CreateMap<Domain.Entities.Computer, ComputerDTO>()
-                .ForMember(dest => dest.HostName,
-                           opt => opt.MapFrom(src => src.HostName))
-                .ForMember(dest => dest.MAC,
-                           opt => opt.MapFrom(src => src.MAC))
-                .ForMember(dest => dest.InventoryNumber,
-                           opt => opt.MapFrom(src => src.InventoryNumber))
-                .ForMember(dest => dest.State,
-                           opt => opt.MapFrom(src => src.State))
-                .ForMember(dest => dest.Characteristics,
-                           opt => opt.MapFrom(src => src.Characteristics))
-                .ForMember(dest => dest.CheckedOn,
-                           opt => opt.MapFrom(src => src.CheckedOn))
-                .ForMember(dest => dest.ModifiedOn,
-                           opt => opt.MapFrom(src => src.ModifiedOn))
-                .ForMember(dest => dest.ComputerComments,
-                           opt => opt.MapFrom(src => src.ComputerComments));
+            CreateMap<Domain.Entities.Computer, ComputerDTO>();
 
-            CreateMap<ComputerCharacteristics, ComputerCharacterisiticsDTO>();
 
             CreateMap<ComputerCheckedOn, CheckedOnDTO>()
                 .ForMember(dest => dest.CheckedOn,

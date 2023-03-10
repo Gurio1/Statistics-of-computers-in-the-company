@@ -30,9 +30,9 @@ namespace API_46731r.Infrastructure
 
             var comp = new Computer()
             {
-                HostName = "U1-R301-03",
-                InventoryNumber = 3432569,
-                MAC = "Test",
+                HostName = "U1-R301-01",
+                InventoryNumber = 234235,
+                Mac = "Test",
                 CheckedOn = new List<ComputerCheckedOn>()
                 {
                     new ComputerCheckedOn()

@@ -2,9 +2,20 @@
 {
     public class ModifiedOn
     {
-        public DateTime checkedOn { get; set; }
-        public string checkedBy { get; set; }
-        public string log { get; set; }
+        public ModifiedOn()
+        {
+            
+        }
+
+        public ModifiedOn(ModifiedOn modifiedOn)
+        {
+            CheckedOn = modifiedOn.CheckedOn;
+            CheckedBy = modifiedOn.CheckedBy;
+            Log = modifiedOn.Log;
+        }
+        public DateTime CheckedOn { get; set; }
+        public string CheckedBy { get; set; }
+        public string Log { get; set; }
     }
 
 

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:WPF_46731r.Views.ComputerView.Details"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -39,7 +38,7 @@
                         FontSize="16"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding Computer.hostName, StringFormat=HostName :{0}}" />
+                        Text="{Binding Computer.HostName, StringFormat=HostName :{0}}" />
 
                         <TextBlock
                         Margin="5,10,0,0"
@@ -47,7 +46,7 @@
                         FontSize="16"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding Computer.mac, StringFormat=MAC :{0}}" />
+                        Text="{Binding Computer.Mac, StringFormat=MAC :{0}}" />
 
                         <TextBlock
                         Margin="5,10,0,0"
@@ -55,7 +54,7 @@
                         FontSize="16"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding Computer.inventoryNumber, StringFormat=Inventory number :{0}}" />
+                        Text="{Binding Computer.InventoryNumber, StringFormat=Inventory number :{0}}" />
 
                         <StackPanel Orientation="Horizontal">
                             <TextBlock
@@ -72,7 +71,7 @@
                             FontSize="16"
                             FontWeight="Medium"
                             Foreground="White"
-                            Text="{Binding Computer.LastChecked.checkedBy, StringFormat=Checked By :{0}}" />
+                            Text="{Binding Computer.LastChecked.CheckedBy, StringFormat=Checked By :{0}}" />
 
                         </StackPanel>
 
@@ -83,7 +82,7 @@
                             FontSize="16"
                             FontWeight="Medium"
                             Foreground="White"
-                            Text="{Binding Computer.LastModified.checkedOn, StringFormat=Modified On :{0}}" />
+                            Text="{Binding Computer.LastModified.CheckedOn, StringFormat=Modified On :{0}}" />
 
                             <TextBlock
                             Margin="30,10,0,0"
@@ -91,7 +90,7 @@
                             FontSize="16"
                             FontWeight="Medium"
                             Foreground="White"
-                            Text="{Binding Computer.LastModified.checkedBy, StringFormat=Checked By :{0}}" />
+                            Text="{Binding Computer.LastModified.CheckedBy, StringFormat=Checked By :{0}}" />
                         </StackPanel>
 
 
@@ -101,7 +100,7 @@
                         FontSize="16"
                         FontWeight="Medium"
                         Foreground="White"
-                        Text="{Binding Computer.state, StringFormat=State :{0}}" />
+                        Text="{Binding Computer.State, StringFormat=State :{0}}" />
 
                         <Expander
                         Margin="5,10,0,0"
@@ -121,7 +120,7 @@
                                 FontSize="14"
                                 FontWeight="Medium"
                                 Foreground="White"
-                                Text="{Binding Computer.characteristics.processor, StringFormat=Processor :{0}}" />
+                                Text="{Binding Computer.Characteristics.Processor, StringFormat=Processor :{0}}" />
 
                                 <TextBlock
                                 Margin="40,10,0,0"
@@ -129,7 +128,7 @@
                                 FontSize="14"
                                 FontWeight="Medium"
                                 Foreground="White"
-                                Text="{Binding Computer.characteristics.ram, StringFormat=RAM :{0}}" />
+                                Text="{Binding Computer.Characteristics.Ram, StringFormat=RAM :{0}}" />
 
                                 <TextBlock
                                 Margin="40,10,0,0"
@@ -137,7 +136,7 @@
                                 FontSize="14"
                                 FontWeight="Medium"
                                 Foreground="White"
-                                Text="{Binding Computer.characteristics.motherBoard, StringFormat=MotherBoard :{0}}" />
+                                Text="{Binding Computer.Characteristics.MotherBoard, StringFormat=MotherBoard :{0}}" />
 
                                 <TextBlock
                                 Margin="40,10,0,0"
@@ -145,15 +144,16 @@
                                 FontSize="14"
                                 FontWeight="Medium"
                                 Foreground="White"
-                                Text="{Binding Computer.characteristics.storage, StringFormat=Storage :{0}}" />
+                                Text="{Binding Computer.Characteristics.Storage, StringFormat=Storage :{0}}" />
                             </StackPanel>
                         </Expander>
                     </StackPanel>
-                    <StackPanel Grid.Row="1">
+                    <DockPanel Grid.Row="1">
                         <Button
                             Margin="20,0,0,0"
                         BorderThickness="0"
                         Command="{Binding Update}"
+                            CommandParameter="{Binding Computer}"
                         Content="Update"
                         Cursor="Hand"
                         FontFamily="Montserrat"
@@ -184,7 +184,42 @@
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
-                    </StackPanel>
+                        
+                        <Button
+                            Margin="0,0,20,0"
+                            BorderThickness="0"
+                            Command="{Binding Delete}"
+                            Content="Delete"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="12"
+                            Foreground="Wheat"
+                            HorizontalAlignment="Right">
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#bd0909" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#800a0a" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                        Width="150"
+                                        Height="40"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DockPanel>
                 </Grid>
             </Border>
         </Border>

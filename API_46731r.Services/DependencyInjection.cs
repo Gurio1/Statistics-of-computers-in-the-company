@@ -14,6 +14,7 @@ namespace API_46731r.Services
         {
             Services.AddScoped<IPasswordHasher<ApplicationUser>, PasswordHasher<ApplicationUser>>();
             Services.AddScoped<IComputerService, ComputerService>();
+            Services.AddScoped<IRoomService, RoomService>();
             Services.AddScoped<IBuildingService, BuildingService>();
             Services.AddScoped<IUserService, UserService>();
             Services.AddScoped<IAuthenticationService, AuthenticationService>();

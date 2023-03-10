@@ -20,7 +20,7 @@ namespace API_46731r.Infrastructure.Repositories
         {
             try
             {
-                var user = await _context.Users.AsNoTracking().Where(x => x.Email == email).Include(x => x.Role).FirstOrDefaultAsync();
+                var user = await _context.Users.Where(x => x.Email == email).Include(x => x.Role).FirstOrDefaultAsync();
 
                 if (user is null)
                 {

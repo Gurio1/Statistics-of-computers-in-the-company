@@ -32,9 +32,9 @@ namespace API_46731r.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<TEntity>> CreateEntity([FromBody] TEntity computer)
+        public async Task<ActionResult<TEntity>> CreateEntity([FromBody] TEntity entity)
         {
-            var result = await _entityService.CreateAsync(computer);
+            var result = await _entityService.CreateAsync(entity);
 
             if (result is null)
             {

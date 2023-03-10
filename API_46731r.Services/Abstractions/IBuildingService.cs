@@ -12,5 +12,6 @@ namespace API_46731r.Services.Abstractions
     public interface IBuildingService : IGenericService<Building>
     {
         Task<IEnumerable<BuildingDTO>> GetAllWithIncludesAsync();
+        Task<Room> AddRoom(Room room);
     }
 }

@@ -6,7 +6,127 @@
              xmlns:local="clr-namespace:WPF_46731r.Views.ComputerView.Details"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <TextBox>Room View</TextBox>
+     <Grid>
+        <Border
+            BorderThickness="1"
+            CornerRadius="10">
+            <Border.Background>
+                <ImageBrush ImageSource="/Images/comp1.jfif" />
+            </Border.Background>
+            <Border.BorderBrush>
+                <SolidColorBrush Color="#7678ed" />
+            </Border.BorderBrush>
+            <Border Grid.Column="2"
+                    CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1.,0" EndPoint="0,1" Opacity="0.92">
+                        <GradientStop Offset="0.4" Color="#ee6123" />
+                        <GradientStop Offset="0.9" Color="#800f2f" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Margin="10,10,0,0">
+                        <TextBlock
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        Text="{Binding Item.Name, StringFormat=Name :{0}}" />
+                        
+                        
+                        <TextBlock
+                            Margin="5,10,0,0"
+                            FontFamily="Montserrat"
+                            FontSize="16"
+                            FontWeight="Medium"
+                            Foreground="White"
+                            Text="{Binding ComputersCount, StringFormat=Computers count :{0}}" />
+                        
+                        </StackPanel>
+                    
+                    
+                    <DockPanel Grid.Row="1">
+                        <Button
+                            Margin="20,0,0,0"
+                        BorderThickness="0"
+                        Command="{Binding Update}"
+                            CommandParameter="{Binding Item}"
+                        Content="Update"
+                        Cursor="Hand"
+                        FontFamily="Montserrat"
+                        FontSize="12"
+                        Foreground="Wheat"
+                        HorizontalAlignment="left">
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#3a86ff" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#1982c4" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                    Width="150"
+                                    Height="40"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                        
+                        <Button
+                            Margin="0,0,20,0"
+                            BorderThickness="0"
+                            Command="{Binding Delete}"
+                            Content="Delete"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="12"
+                            Foreground="Wheat"
+                            HorizontalAlignment="Right">
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#bd0909" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#800a0a" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                        Width="150"
+                                        Height="40"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </DockPanel>
+                </Grid>
+            </Border>
+        </Border>
     </Grid>
 </UserControl>

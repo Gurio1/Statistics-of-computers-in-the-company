@@ -5,6 +5,8 @@ namespace API_46731r.Contracts
 {
     public class RoomDTO
     {
+        public int Id { get; set; }
+        public int BuildingId { get; set; }
         public string Name { get; set; }
 
 

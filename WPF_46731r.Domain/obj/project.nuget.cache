@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "gaPeHHvNYrfIfG0uurZg3pOfrg0uPJwlPvSwPPCan/R5hmP5P/iB7oPY37E6b+Ic7IfjrUm2NXgqfe6rWxN85w==",
+  "success": true,
+  "projectFilePath": "D:\\User\\Desktop\\VSP-46731r (1)\\VSP-46731r\\VSP_46731r_MyProject\\WPF_46731r.Domain\\WPF_46731r.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Andrey-PC\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -11,5 +11,6 @@ namespace API_46731r.Domain.Repositories
     public interface IBuildingRepository : IGenericRepository<Building>
     {
         Task<IEnumerable<Building>> GetAllWithIncludesAsync();
+        Task<Room> AddRoom(Room room);
     }
 }

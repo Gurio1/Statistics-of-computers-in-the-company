@@ -7,11 +7,14 @@
     d:DesignHeight="400"
              d:DesignWidth="600"
              mc:Ignorable="d">
-
-
-    <Grid Background="Red">
-
-      
-    </Grid>
-
+    
+    <TextBlock
+        FontFamily="Montserrat"
+        FontSize="32"
+        FontWeight="Medium"
+        Text="Welcome"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        Foreground="Chocolate"></TextBlock>
 </UserControl>
+

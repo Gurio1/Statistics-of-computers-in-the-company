@@ -15,37 +15,15 @@ namespace WPF_46731r.Services
 
         void ___ICH(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            if (SelectedItem is Computer)
-            {
-                SetValue(SelectedComputer_Property, SelectedItem);
-            }
-            else if (SelectedItem is Building)
-            {
-                SetValue(SelectedBuilding_Property, SelectedItem);
-            }
-            else if (SelectedItem is Room)
-            {
-                SetValue(SelectedRoom_Property, SelectedItem);
-            }
+            SetValue(SelectedItem_Property, SelectedItem);
         }
 
-        public object SelectedComputer_
+        public object SelectedItem_
         {
-            get { return GetValue(SelectedComputer_Property); }
-            set { SetValue(SelectedComputer_Property, value); }
+            get { return GetValue(SelectedItem_Property); }
+            set { SetValue(SelectedItem_Property, value); }
         }
-        public object SelectedBuilding_
-        {
-            get { return GetValue(SelectedComputer_Property); }
-            set { SetValue(SelectedComputer_Property, value); }
-        }
-        public object SelectedRoom_
-        {
-            get { return GetValue(SelectedComputer_Property); }
-            set { SetValue(SelectedComputer_Property, value); }
-        }
-        public static readonly DependencyProperty SelectedComputer_Property = DependencyProperty.Register("SelectedComputer_", typeof(object), typeof(ExtendedTreeView), new UIPropertyMetadata(null));
-        public static readonly DependencyProperty SelectedBuilding_Property = DependencyProperty.Register("SelectedBuilding_", typeof(object), typeof(ExtendedTreeView), new UIPropertyMetadata(null));
-        public static readonly DependencyProperty SelectedRoom_Property = DependencyProperty.Register("SelectedRoom_", typeof(object), typeof(ExtendedTreeView), new UIPropertyMetadata(null));
+
+        public static readonly DependencyProperty SelectedItem_Property = DependencyProperty.Register("SelectedItem_", typeof(object), typeof(ExtendedTreeView), new UIPropertyMetadata(null));
     }
 }

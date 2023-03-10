@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using WPF_46731r.ViewModels;
 
 namespace WPF_46731r.Views
 {
@@ -9,9 +10,10 @@ namespace WPF_46731r.Views
     /// </summary>
     public partial class LoginView : Window
     {
-        public LoginView()
+        public LoginView(LoginViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

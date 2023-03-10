@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:WPF_46731r.Views"
     xmlns:vm="clr-namespace:WPF_46731r.ViewModels"
-    xmlns:computerView="clr-namespace:WPF_46731r.ViewModels.ComputerView"
+    xmlns:computersView="clr-namespace:WPF_46731r.ViewModels.ComputersView"
     Title="MainWindow"
     Width="1300"
     Height="700"
@@ -172,7 +172,7 @@
                         Content="{Binding CurrentViewModel}">
                         <ContentControl.Resources>
 
-                            <DataTemplate DataType="{x:Type computerView:ComputersViewModel}">
+                            <DataTemplate DataType="{x:Type computersView:ComputersViewModel}">
                                 <views:ComputersView />
                             </DataTemplate>
 

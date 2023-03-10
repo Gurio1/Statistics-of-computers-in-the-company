@@ -97,8 +97,9 @@ namespace API_46731r.Infrastructure.Repository
             {
                 throw new ArgumentNullException(nameof(entity));
             }
-
-            context.Entry(entity).State = EntityState.Modified;
+            
+            context.Entry(entity).State = EntityState.Modified;;
+            context.Set<TEntity>().Update(entity);
 
             try
             {

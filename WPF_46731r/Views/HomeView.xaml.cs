@@ -24,5 +24,6 @@ namespace WPF_46731r.Views
         {
             InitializeComponent();
         }
+        
     }
 }

@@ -30,13 +30,35 @@ namespace API_46731r.Infrastructure.Repositories
                                                         .ThenInclude(c =>c.Characteristics)
                                                  .Include(r => r.Rooms)
                                                     .ThenInclude(c =>c.Computers)
-                                                        .ThenInclude(a =>a.CheckedOn.OrderBy(t =>t.CheckedOn).Take(1))
+                                                        .ThenInclude(a =>a.CheckedOn.OrderByDescending(t =>t.Id).Take(1))
                                                             .ThenInclude(d =>d.CheckedBy)
                                                 .Include(r =>r.Rooms)
                                                     .ThenInclude(c =>c.Computers)
-                                                        .ThenInclude(a =>a.ModifiedOn.OrderBy(t => t.CheckedOn).Take(1))
+                                                        .ThenInclude(a =>a.ModifiedOn.OrderByDescending(t => t.Id).Take(1))
                                                             .ThenInclude(d =>d.CheckedBy)
                                                  .ToListAsync();
+        }
+
+        public async Task<Room> AddRoom(Room room)
+        {
+            if (room is null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            try
+            {
+                var building = _context.Buildings.Where(b => b.Id == room.BuildingId).Include(r => r.Rooms).FirstOrDefault();
+                building.Rooms.Add(room);
+            
+                await _context.SaveChangesAsync();
+                return room;
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"{nameof(room)} can not be added! :{e.Message}");
+            }
+
         }
     }
 }

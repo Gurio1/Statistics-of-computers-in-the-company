@@ -30,5 +30,10 @@ namespace API_46731r.Services
 
             return b;
         }
+
+        public async Task<Room> AddRoom(Room room)
+        {
+            return await _repository.AddRoom(room);
+        }
     }
 }

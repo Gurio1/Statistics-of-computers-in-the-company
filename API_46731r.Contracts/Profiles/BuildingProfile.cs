@@ -9,37 +9,13 @@ namespace API_46731r.Contracts.Profiles
     {
         public BuildingProfile()
         {
-            CreateMap<Building, BuildingDTO>()
-                .ForMember(dest => dest.Name,
-                           opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Rooms,
-                           opt => opt.MapFrom(src => src.Rooms));
+            CreateMap<Building, BuildingDTO>();
+   
 
-            CreateMap<Room, RoomDTO>()
-                .ForMember(dest => dest.Name,
-                           opt => opt.MapFrom(src => src.Name))
-                .ForMember(dest => dest.Computers,
-                           opt => opt.MapFrom(src => src.Computers));
+            CreateMap<Room, RoomDTO>();
+   
 
-            CreateMap<Domain.Entities.Computer, ComputerDTO>()
-                .ForMember(dest => dest.HostName,
-                           opt => opt.MapFrom(src => src.HostName))
-                .ForMember(dest => dest.MAC,
-                           opt => opt.MapFrom(src => src.MAC))
-                .ForMember(dest => dest.InventoryNumber,
-                           opt => opt.MapFrom(src => src.InventoryNumber))
-                .ForMember(dest => dest.State,
-                           opt => opt.MapFrom(src => src.State))
-                .ForMember(dest => dest.Characteristics,
-                           opt => opt.MapFrom(src => src.Characteristics))
-                .ForMember(dest => dest.CheckedOn,
-                           opt => opt.MapFrom(src => src.CheckedOn))
-                .ForMember(dest => dest.ModifiedOn,
-                           opt => opt.MapFrom(src => src.ModifiedOn))
-                .ForMember(dest => dest.ComputerComments,
-                           opt => opt.MapFrom(src => src.ComputerComments));
-
-            CreateMap<ComputerCharacteristics, ComputerCharacterisiticsDTO>();
+            CreateMap<Domain.Entities.Computer, ComputerDTO>();
 
             CreateMap<List<ComputerCheckedOn>, CheckedOnDTO>()
                 .ForMember(dest => dest.CheckedOn,

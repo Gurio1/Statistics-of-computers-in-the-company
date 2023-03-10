@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using WPF_46731r.Commands.Navigation;
 using WPF_46731r.Services;
-using WPF_46731r.ViewModels.ComputerView;
+using WPF_46731r.ViewModels.ComputersView;
 
 namespace WPF_46731r.ViewModels
 {

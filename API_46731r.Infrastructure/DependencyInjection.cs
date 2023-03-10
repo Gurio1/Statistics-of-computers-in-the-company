@@ -1,11 +1,6 @@
 ﻿using API_46731r.Domain.Repositories;
 using API_46731r.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace API_46731r.Infrastructure
 {
@@ -14,6 +9,7 @@ namespace API_46731r.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection Services)
         {
             Services.AddScoped<IComputerRepository, ComputerRepository>();
+            Services.AddScoped<IRoomRepository, RoomRepository>();
             Services.AddScoped<IBuildingRepository, BuildingRepository>();
             Services.AddScoped<IUserRepository, UserRepository>();
 

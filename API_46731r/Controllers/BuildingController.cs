@@ -22,18 +22,32 @@ namespace API_46731r.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ComputerDTO>>> GetAllComputers()
+        public async Task<ActionResult<IEnumerable<ComputerDTO>>> GetAll()
         {
             Stopwatch stopwatc = Stopwatch.StartNew();
 
             var entities = await _buildingService.GetAllWithIncludesAsync();
-
+            
             stopwatc.Stop();
 
-            _logger.LogInformation($"{nameof(GetAllComputers)} was executed for {stopwatc.ElapsedMilliseconds} ms");
+            _logger.LogInformation($"{nameof(GetAll)} was executed for {stopwatc.ElapsedMilliseconds} ms");
 
             return Ok(entities);
 
+        }
+        
+        [HttpPost]
+        public async Task<ActionResult<Room>> AddRoom([FromBody] Room entity)
+        {
+
+            var result = await _buildingService.AddRoom(entity);
+
+            if (result is null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(result);
         }
 
     }

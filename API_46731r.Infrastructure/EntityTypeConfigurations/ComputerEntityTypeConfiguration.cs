@@ -12,13 +12,13 @@ namespace API_46731r.Infrastructure.EntityTypeConfigurations
             builder.ToTable("Computers", "inventory");
 
             builder.HasKey(c => c.Id);
-            builder.HasAlternateKey(c => c.InventoryNumber);
+            builder.HasIndex(c => c.InventoryNumber).IsUnique();
             builder.HasIndex(c => c.HostName).IsUnique();
 
             builder.Property(c => c.InventoryNumber).ValueGeneratedNever().IsRequired();
             builder.Property(c => c.Id).ValueGeneratedOnAdd();
             builder.Property(c => c.HostName).HasMaxLength(50).IsRequired();
-            builder.Property(c => c.MAC).HasMaxLength(50).IsRequired();
+            builder.Property(c => c.Mac).HasMaxLength(50).IsRequired();
 
             builder.HasOne(c => c.Characteristics)
                    .WithOne()

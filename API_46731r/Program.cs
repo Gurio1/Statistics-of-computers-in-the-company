@@ -65,12 +65,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<MyProjectDbContext>(options =>
 {
-    if (!bool.Parse(config["IsInMemory"]))
-    {
-        options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
-    }
-    //options.UseInMemoryDatabase("InMemory");
-});
+    options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+    });
 
 builder.Services.AddAuthentication(opt =>
 {
@@ -98,10 +94,10 @@ builder.Services.AddAutoMapper(typeof(BuildingDTO).Assembly);
 
 var app = builder.Build();
 
-//using (var scope = app.Services.CreateScope())
-//{
-//    SeedDb.Init(scope.ServiceProvider);
-//}
+/*using (var scope = app.Services.CreateScope())
+{
+    scope.ServiceProvider.Init();
+}*/
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

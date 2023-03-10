@@ -1,0 +1,185 @@
+﻿<Window x:Class="WPF_46731r.Views.PopUpComputerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="PopUpComputerView" Height="350" Width="800">
+    <Grid Background="Azure">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel 
+            Width="250"
+            Margin="0,10,0,0"
+            Orientation="Vertical">
+            <TextBlock
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="HostName" />
+            <TextBox
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="{Binding ComputerTemplate.HostName}" />
+
+            <TextBlock
+                        FontFamily="Montserrat"
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="MAC" />
+            <TextBox
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="{Binding ComputerTemplate.Mac}" />
+            <TextBlock
+                        FontFamily="Montserrat"
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="Inventory number" />
+
+            <TextBox
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="{Binding ComputerTemplate.InventoryNumber}" />
+            <TextBlock
+                FontFamily="Montserrat"
+                Margin="0,10,0,0"
+                FontSize="16"
+                FontWeight="Medium"
+                Foreground="black"
+                Text="State" />
+
+<ComboBox ItemsSource="{Binding EnumValues}"
+          SelectedItem="{Binding ComputerTemplate.State, Mode=TwoWay}"/>
+
+        </StackPanel>
+        
+        <StackPanel 
+            Width="250"
+            Grid.Column="2"
+            Margin="0,10,0,0"
+            Orientation="Vertical">
+            <TextBlock
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="Ram" />
+            <TextBox
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="{Binding ComputerTemplate.Characteristics.Ram}" />
+
+            <TextBlock
+                        FontFamily="Montserrat"
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="Storage" />
+            <TextBox
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="{Binding ComputerTemplate.Characteristics.Storage}" />
+            <TextBlock
+                        FontFamily="Montserrat"
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="Processor" />
+
+            <TextBox
+                        Margin="5,10,0,0"
+                        FontFamily="Montserrat"
+                        FontSize="16"
+                        FontWeight="Medium"
+                        Foreground="black"
+                        Text="{Binding ComputerTemplate.Characteristics.Processor}" />
+            <TextBlock
+                Margin="0,10,0,0"
+                FontFamily="Montserrat"
+                FontSize="16"
+                FontWeight="Medium"
+                Foreground="black"
+                Text="MotherBoard" />
+
+            <TextBox
+                Margin="5,10,0,0"
+                FontFamily="Montserrat"
+                FontSize="16"
+                FontWeight="Medium"
+                Foreground="black"
+                Text="{Binding ComputerTemplate.Characteristics.MotherBoard}" />
+
+        </StackPanel>
+        
+        <DockPanel
+            Grid.Column="1"
+            Grid.Row="1">
+                        <Button
+                            BorderThickness="0"
+                            Margin="-50,0,-60,0"
+                            Command="{Binding Command}"
+                            CommandParameter="{Binding ComputerTemplate}"
+                            Content="{Binding ButtonName}"
+                            Cursor="Hand"
+                            FontFamily="Montserrat"
+                            FontSize="12"
+                            Foreground="Wheat">
+
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#3a86ff" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#1982c4" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+
+                            <Button.Template>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                    Width="150"
+                                    Height="40"
+                                    Background="{TemplateBinding Background}"
+                                    CornerRadius="20">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+        </DockPanel>
+    </Grid>
+</Window>

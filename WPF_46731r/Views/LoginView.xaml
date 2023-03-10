@@ -5,13 +5,11 @@
     xmlns:controls="clr-namespace:WPF_46731r.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="clr-namespace:WPF_46731r.ViewModels"
     Title="LoginView"
     Width="800"
     Height="550"
     AllowsTransparency="True"
     Background="Transparent"
-    MouseDown="Window_MouseDown"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
@@ -20,13 +18,6 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
     </Window.Resources>
-
-    <Window.Visibility>
-        <Binding
-            Converter="{StaticResource BooleanToVisibility}"
-            Mode="TwoWay"
-            Path="IsViewVisible" />
-    </Window.Visibility>
 
     <Border CornerRadius="30">
         <Border.Background>
@@ -271,14 +262,6 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <TextBlock
-                        Margin="0,8,0,0"
-                        Cursor="Hand"
-                        FontFamily="Montserrat"
-                        FontSize="12"
-                        FontWeight="Medium"
-                        Foreground="DarkGray"
-                        Text="Forgot Password?"/>
                 </StackPanel>
             </Grid>
         </Border>

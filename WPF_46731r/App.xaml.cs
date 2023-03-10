@@ -1,15 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
+using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using Microsoft.Extensions.Hosting;
 using WPF_46731r.Domain.Models;
-using WPF_46731r.Domain.Models.Computer;
 using WPF_46731r.Domain.Service;
+using WPF_46731r.Domain.Service.Abstractions;
 using WPF_46731r.Services;
 using WPF_46731r.State.Navigators;
 using WPF_46731r.ViewModels;
-using WPF_46731r.ViewModels.ComputerView;
+using WPF_46731r.ViewModels.ComputersView;
 using WPF_46731r.Views;
 
 namespace WPF_46731r
@@ -19,54 +18,68 @@ namespace WPF_46731r
     /// </summary>
     public partial class App : Application  
     {
-        private static WindowNavigator _winNav;
-        private static INavigator _navigator;
         private static NavigationViewModelBar _navBar;
         private static ApplicationUser _user;
-        private static ObservableCollection<Building> _comps;
+
+        private static IHost _builder;
 
         public App()
         {
-            _winNav = new WindowNavigator();
-            _navigator = new Navigator();
-            _navBar = new NavigationViewModelBar(CreateHomeViewModel(), CreateComputersViewModel());
+            _builder = new HostBuilder()
+                .ConfigureServices((hostContext, services) =>
+                {
+                    ConfigureServices(services);
+                })
+                .Build();
+            _navBar = _builder.Services.GetRequiredService<NavigationViewModelBar>();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var navServ = CreateHomeViewModel();
-            navServ.Navigate();
+            var loginView = _builder.Services.GetRequiredService<LoginView>();
+            var winNav = _builder.Services.GetRequiredService<WindowNavigator>();
+            winNav.CurrentView = loginView;
 
-            var loginView = new LoginView()
-            {
-                DataContext = new LoginViewModel(_winNav)
-            };
-            _winNav.CurrentView = loginView;
-
-            //InitMainView(new ApplicationUser() { Name = "Test" });
             base.OnStartup(e);
+            
         }
 
         public static async void InitMainView(ApplicationUser user)
         {
+            var apiClient = _builder.Services.GetRequiredService<IApiClient>();
             _user = user;
-            _comps = await HttpService.GetAllBuildings(user);
-            _winNav.CurrentView = new MainWindow()
+            var entities  = await apiClient.GetAllBuildings(user);
+            var winNav = _builder.Services.GetRequiredService<WindowNavigator>();
+            var compViewModel = _builder.Services.GetRequiredService<ComputersViewModel>();
+            compViewModel.BindDataToTheTree(entities);
+            winNav.CurrentView = new MainWindow()
             {
-                DataContext = new MainViewModel(_navigator,user,_navBar)
+                DataContext = new MainViewModel(_builder.Services.GetRequiredService<INavigator>(),user,_navBar)
             };
         }
-
-
-        private INavigationService<HomeViewModel> CreateHomeViewModel()
+        
+        private static void ConfigureServices(IServiceCollection services)
         {
-            return new NavigationService<HomeViewModel>(_navigator, () => new HomeViewModel(_navBar));
-        }
+            services.AddSingleton<WindowNavigator>();
 
-        private INavigationService<ComputersViewModel> CreateComputersViewModel()
-        {
-            return new NavigationService<ComputersViewModel>(_navigator, () => new ComputersViewModel(_navBar,new TreeViewModel(_comps), _winNav));
-        }
+            services.AddTransient<HomeViewModel>();
+            services.AddTransient<LoginViewModel>();
+            services.AddScoped<ComputersViewModel>();
 
+            services.AddHttpClient<IApiClient,ApiClient>(client =>
+            {
+                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _user?.JWT);
+            });
+            services.AddSingleton<INavigator, Navigator>();
+            services.AddSingleton<INavigationService<HomeViewModel>, NavigationService<HomeViewModel>>();
+            services.AddSingleton<INavigationService<ComputersViewModel>, NavigationService<ComputersViewModel>>();
+            services.AddSingleton<NavigationViewModelBar>();
+            services.AddSingleton<Func<HomeViewModel>>(provider => provider.GetRequiredService<HomeViewModel>);
+            services.AddSingleton<Func<ComputersViewModel>>(provider => provider.GetRequiredService<ComputersViewModel>);
+
+            services.AddScoped<ApplicationUser>();
+            services.AddScoped<LoginView>();
+            
+        }
     }
 }

@@ -8,8 +8,8 @@
     xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
     xmlns:local="clr-namespace:WPF_46731r.Services"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:WPF_46731r.ViewModels.ComputerView.UserControls"
     xmlns:details="clr-namespace:WPF_46731r.Views.ComputerView.Details"
+    xmlns:userControls="clr-namespace:WPF_46731r.ViewModels.ComputersView.UserControls"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -20,44 +20,82 @@
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-
+        
         <local:ExtendedTreeView
-            ItemsSource="{Binding Tree.Buildings}"
-            SelectedComputer_="{Binding Computer, Mode=TwoWay}"
-            SelectedBuilding_="{Binding Building, Mode=TwoWay}"
-            SelectedRoom_="{Binding Room, Mode=TwoWay}"
+            x:Name="TreeView"
+            DataContext="{Binding}"
+            ItemsSource="{Binding Buildings}"
+            SelectedItem_="{Binding SelectedItem, Mode=TwoWay}"
             Style="{StaticResource ExtendedTreeView}">
+            <local:ExtendedTreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded,Mode=TwoWay}" />
+                    <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay}" />
+                </Style>
+            </local:ExtendedTreeView.ItemContainerStyle>
             <local:ExtendedTreeView.Resources>
+            <!--Selected item background-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                 Color="#132a3d" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}"
+                                     Color="#132a3d" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                                     Color="#132a3d" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
+                                     Color="#132a3d" />
                 <HierarchicalDataTemplate DataType="{x:Type b:Building}"
                                           ItemsSource="{Binding Rooms}">
                     <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                        <fa:IconImage
-                            Width="15"
-                            Height="15"
-                            Margin="0,0,5,0"
-                            Foreground="{StaticResource titleColor2}"
-                            Icon="Building" />
-                        <TextBlock Foreground="Azure" Text="{Binding Name}" />
+                        <fa:IconImage Width="15" Height="15" Margin="0,0,5,0" Foreground="{StaticResource titleColor2}" Icon="Building" />
+                        <TextBlock Foreground="Azure" Text="{Binding Name}"/>
                         <TextBlock Foreground="Green" Text=" [" />
                         <TextBlock Foreground="Green" Text="{Binding Rooms.Count}" />
                         <TextBlock Foreground="Green" Text="]" />
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add new building" 
+                                          Command="{Binding DataContext.AddNewBuilding, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                          />
+                                <MenuItem Header="Add new room" 
+                                          Command="{Binding DataContext.Add, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                                <MenuItem Header="Update building" 
+                                          Command="{Binding DataContext.Update, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                                <MenuItem Header="Delete bilding" 
+                                          Command="{Binding DataContext.DeleteTreeItem, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
                     </StackPanel>
                 </HierarchicalDataTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type b:Room}" ItemsSource="{Binding Computers}">
                     <StackPanel Margin="0,5,0,0" Orientation="Horizontal">
-                        <fa:IconImage
-                            Width="15"
-                            Height="15"
-                            Margin="0,0,5,0"
-                            Foreground="{StaticResource titleColor2}"
-                            Icon="DoorOpen" />
-                        <TextBlock
-                            Foreground="Pink"
-                            Style="{StaticResource menuButtonText}"
-                            Text="{Binding Name}" />
+                        <fa:IconImage Width="15" Height="15" Margin="0,0,5,0" Foreground="{StaticResource titleColor2}" Icon="DoorOpen" />
+                        <TextBlock Foreground="Pink" Style="{StaticResource menuButtonText}" Text="{Binding Name}" />
                         <TextBlock Foreground="Orange" Text=" [" />
                         <TextBlock Foreground="Orange" Text="{Binding Computers.Count}" />
                         <TextBlock Foreground="Orange" Text="]" />
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add new computer" 
+                                          Command="{Binding DataContext.Add, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                                <MenuItem Header="Update room" 
+                                          Command="{Binding DataContext.Update, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                                <MenuItem Header="Delete room" 
+                                          Command="{Binding DataContext.DeleteTreeItem, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
                     </StackPanel>
                 </HierarchicalDataTemplate>
                 <DataTemplate DataType="{x:Type comp:Computer}">
@@ -68,11 +106,24 @@
                             Margin="0,0,5,0"
                             Foreground="{StaticResource titleColor3}"
                             Icon="Computer" />
-                        <TextBlock Foreground="Coral" Text="{Binding hostName}" />
+                        <TextBlock Foreground="Coral" Text="{Binding HostName}" />
+                        <StackPanel.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Update computer" 
+                                          Command="{Binding DataContext.Update, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                                <MenuItem Header="Delete computer" 
+                                          Command="{Binding DataContext.DeleteTreeItem, Source={x:Reference TreeView}}"
+                                          CommandParameter="{Binding}"
+                                />
+                            </ContextMenu>
+                        </StackPanel.ContextMenu>
                     </StackPanel>
                 </DataTemplate>
             </local:ExtendedTreeView.Resources>
         </local:ExtendedTreeView>
+
         
         <!--  Content  -->
         <ContentControl
@@ -80,15 +131,15 @@
             Content="{Binding CurrentUserControlViewModel}">
             <ContentControl.Resources>
 
-                <DataTemplate DataType="{x:Type vm:BuildingDetailsViewModel}">
+                <DataTemplate DataType="{x:Type userControls:BuildingDetailsViewModel}">
                     <details:BuildingDetailsView />
                 </DataTemplate>
                 
-                <DataTemplate DataType="{x:Type vm:RoomDetailsViewModel}">
+                <DataTemplate DataType="{x:Type userControls:RoomDetailsViewModel}">
                     <details:RoomDetailsView />
                 </DataTemplate>
 
-                <DataTemplate DataType="{x:Type vm:ComputerDetailsViewModel}">
+                <DataTemplate DataType="{x:Type userControls:ComputerDetailsViewModel}">
                     <details:ComputerDetailsView />
                 </DataTemplate>
             </ContentControl.Resources>

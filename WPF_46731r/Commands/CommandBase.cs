@@ -11,7 +11,7 @@ namespace WPF_46731r.Commands
 
         public abstract void Execute(object? parameter);
 
-        protected void OnCanExecuteChanget()
+        protected void OnCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, new EventArgs());
         }

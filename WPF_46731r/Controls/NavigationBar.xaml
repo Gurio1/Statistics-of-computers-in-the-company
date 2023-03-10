@@ -58,15 +58,6 @@
                     <TextBlock Style="{StaticResource menuButtonText}" Text="Computers" />
                 </StackPanel>
             </RadioButton>
-
-            <RadioButton Style="{StaticResource menuButton}" Tag="{StaticResource color2}">
-
-                <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="KitMedical" Style="{StaticResource menuButtonIcon}" />
-                    <TextBlock Style="{StaticResource menuButtonText}" Text="Defects" />
-                </StackPanel>
-            </RadioButton>
-
         </StackPanel>
 
     </Border>
